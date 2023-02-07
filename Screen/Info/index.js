@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { View, Image, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  ToastAndroid,
+} from "react-native";
 import styles from "./styles";
 const Info = (props) => {
   const navi = props.navigation;
@@ -16,8 +22,19 @@ const Info = (props) => {
     navi.navigate(name, data);
   };
 
+  const renderIcon = (src) => {
+    return <Image style={styles.icon} source={src} />;
+  };
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.containerStore}>
+        <Text style={styles.textStore}>Go to store</Text>
+        <Image
+          style={styles.iconStore}
+          source={require("../../assets/store_40.png")}
+        />
+      </TouchableOpacity>
       <View style={styles.avatar}>
         <Image
           style={styles.img}
@@ -28,10 +45,20 @@ const Info = (props) => {
       </View>
 
       <View style={styles.form}>
-        <Text style={styles.textForm}>Name : {info.name}</Text>
-        <Text style={styles.textForm}>Student Id : {info.studenId}</Text>
-        <Text style={styles.textForm}>Email : {info.email}</Text>
-        <Text style={styles.textForm}>Phone : {info.phone}</Text>
+        <View>
+          <Text style={styles.textForm}>
+            {renderIcon(require("../../assets/person_25.png"))} {info.name}
+          </Text>
+          <Text style={styles.textForm}>
+            {renderIcon(require("../../assets/id_25.png"))} {info.studenId}
+          </Text>
+          <Text style={styles.textForm}>
+            {renderIcon(require("../../assets/mail_25.png"))} {info.email}
+          </Text>
+          <Text style={styles.textForm}>
+            {renderIcon(require("../../assets/phone__25.png"))} {info.phone}
+          </Text>
+        </View>
         <TouchableOpacity
           style={styles.btn}
           onPress={() =>

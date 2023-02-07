@@ -5,12 +5,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 100,
+    backgroundColor: color.background,
   },
   form: {
     alignItems: "center",
-    marginTop: 50,
-    width: "90%",
+    marginTop: 40,
+    width: "80%",
   },
   avatar: {
     alignItems: "center",
@@ -25,9 +25,10 @@ const styles = StyleSheet.create({
     borderColor: color.primary,
   },
   textForm: {
-    color: color.black,
-    fontWeight: "bold",
+    color: color.primary,
     fontSize: 20,
+    fontWeight: "500",
+    marginBottom: 20,
   },
   btn: {
     borderRadius: 30,
@@ -38,12 +39,37 @@ const styles = StyleSheet.create({
     width: "100%",
     borderColor: "#BFACE2",
     borderWidth: 2,
-    marginTop: 70,
+    marginTop: 50,
   },
   textBtn: {
     color: color.white,
     fontSize: 20,
     fontWeight: "bold",
+  },
+  icon: {
+    width: 25,
+    height: 25,
+    backgroundColor: color.black,
+    resizeMode: "contain",
+  },
+  containerStore: {
+    alignSelf: "flex-end",
+    marginBottom: 30,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    marginTop: 10,
+    marginEnd: 5,
+    borderBottomWidth: 2,
+  },
+  iconStore: {
+    width: 25,
+    height: 25,
+  },
+  textStore: {
+    color: color.primary,
+    fontWeight: "600",
+    fontSize: 16,
+    marginEnd: 5,
   },
 });
 export default styles;

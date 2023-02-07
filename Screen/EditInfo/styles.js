@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 20,
     borderWidth: 1.7,
-    borderColor: color.red,
+    borderColor: "#8c9eff",
   },
   touchOpa: {
-    backgroundColor: color.primary,
+    backgroundColor: "#3d5afe",
     width: "100%",
     height: "100%",
     justifyContent: "center",
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   textTouchOpa: {
     fontSize: 18,
     fontWeight: "bold",
-    color: color.black,
+    color: "#ede7f6",
   },
 });
 export default styles;
