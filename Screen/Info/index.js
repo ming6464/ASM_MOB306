@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ToastAndroid,
 } from "react-native";
+import tagconst from "../../contains/tagconst";
 import styles from "./styles";
 const Info = (props) => {
   const navi = props.navigation;
@@ -18,17 +19,18 @@ const Info = (props) => {
   const UpdateInfo = (info) => {
     setInfo(info);
   };
-  const changeScreen = (name, data = {}) => {
-    navi.navigate(name, data);
-  };
-
   const renderIcon = (src) => {
     return <Image style={styles.icon} source={src} />;
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.containerStore}>
+      <TouchableOpacity
+        style={styles.containerStore}
+        onPress={() => {
+          navi.navigate(tagconst.MANAGERSTORE);
+        }}
+      >
         <Text style={styles.textStore}>Go to store</Text>
         <Image
           style={styles.iconStore}
@@ -62,7 +64,10 @@ const Info = (props) => {
         <TouchableOpacity
           style={styles.btn}
           onPress={() =>
-            changeScreen("Edit Info", { info: info, setInfo: setInfo })
+            navi.navigate(tagconst.EDITINFOMATION, {
+              info: info,
+              setInfo: setInfo,
+            })
           }
         >
           <Text style={styles.textBtn}>Edit</Text>

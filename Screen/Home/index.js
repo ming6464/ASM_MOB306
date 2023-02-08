@@ -1,15 +1,21 @@
 import { Button, View } from "react-native";
+import tagconst from "../../contains/tagconst";
 import styles from "./styles";
-
 const Home = (props) => {
   const navi = props.navigation;
   return (
     <View>
       <Button
         onPress={() => {
-          navi.navigate("Info");
+          navi.navigate(tagconst.USERINFOMATION);
         }}
-        title="Thông tin cá nhân"
+        title="User Infomation"
+      />
+      <Button
+        onPress={() => {
+          navi.navigate(tagconst.MANAGERSTORE);
+        }}
+        title="Manager Store"
       />
     </View>
   );

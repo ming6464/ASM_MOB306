@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     color: color.primary,
     fontWeight: "600",
     fontSize: 16,
-    marginEnd: 5,
+    width: 100,
   },
 });
 export default styles;

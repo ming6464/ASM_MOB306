@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import color from "../../contains/color";
+import tagconst from "../../contains/tagconst";
 import styles from "./styles";
 
 const EditInfo = (props) => {
@@ -63,7 +64,7 @@ const EditInfo = (props) => {
         <View style={styles.btn}>
           <TouchableOpacity
             style={styles.touchOpa}
-            onPress={() => navi.navigate("Home")}
+            onPress={() => navi.navigate(tagconst.HOME)}
           >
             <Text style={styles.textTouchOpa}>Cancle</Text>
           </TouchableOpacity>
@@ -73,7 +74,7 @@ const EditInfo = (props) => {
             style={styles.touchOpa}
             onPress={() => {
               setInfo({ name, studenId, email, phone });
-              navi.navigate("Info");
+              navi.navigate(tagconst.USERINFOMATION);
             }}
           >
             <Text style={styles.textTouchOpa}>Save</Text>
