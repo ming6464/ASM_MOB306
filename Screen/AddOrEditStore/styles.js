@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 20,
     borderWidth: 1.7,
-    borderColor: "#8c9eff",
+    borderColor: color.border_btn,
   },
   touchOpa: {
-    backgroundColor: "#3d5afe",
+    backgroundColor: color.bg_btn,
     width: "100%",
     height: "100%",
     justifyContent: "center",
@@ -54,6 +54,14 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginStart: 10,
     width: "100%",
+  },
+  container_state: {
+    flexDirection: "row",
+  },
+  text_state: {
+    fontSize: 20,
+    color: color.primary,
+    marginEnd: 15,
   },
 });
 export default styles;

@@ -12,7 +12,10 @@ import tagconst from "../../contains/tagconst";
 
 const ManagerStore = (props) => {
   const navi = props.navigation;
-  let itemStore = {
+  const [isShowBtn, setIsShowBtn] = useState(true);
+  let scrollY = 0;
+  let itemStore = [
+    {
       id: 0,
       avatar:
         "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
@@ -21,16 +24,62 @@ const ManagerStore = (props) => {
       address: "Hàng đông, Hà Nội",
       state: 1,
     },
-    itemStore1 = {
+    {
       id: 1,
       avatar:
         "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
       name: "Đồ lưu niệm",
       phone: "092889388293",
       address: "Hàng đông, Hà Nội",
+      state: 1,
+    },
+    {
+      id: 2,
+      avatar:
+        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
+      name: "Đồ lưu niệm",
+      phone: "092889388293",
+      address: "Hàng đông, Hà Nội",
+      state: 1,
+    },
+    {
+      id: 3,
+      avatar:
+        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
+      name: "Đồ lưu niệm",
+      phone: "092889388293",
+      address: "Hàng đông, Hà Nội",
       state: 0,
-    };
-  const [listItemStore, setListItemStore] = useState([itemStore, itemStore1]);
+    },
+    {
+      id: 4,
+      avatar:
+        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
+      name: "Đồ lưu niệm",
+      phone: "092889388293",
+      address: "Hàng đông, Hà Nội",
+      state: 1,
+    },
+    {
+      id: 5,
+      avatar:
+        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
+      name: "Đồ lưu niệm",
+      phone: "092889388293",
+      address: "Hàng đông, Hà Nội",
+      state: 1,
+    },
+    {
+      id: 6,
+      avatar:
+        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
+      name: "Đồ lưu niệm",
+      phone: "092889388293",
+      address: "Hàng đông, Hà Nội",
+      state: 1,
+    },
+  ];
+  const [listItemStore, setListItemStore] = useState(itemStore);
   const onEdit = (item) => {
     navi.navigate(tagconst.EDITSTORE, {
       AddOfEditList: AddOfEditList,
@@ -71,25 +120,27 @@ const ManagerStore = (props) => {
   };
   return (
     <View>
-      <Button
-        title="Add"
-        onPress={() => {
-          navi.navigate(tagconst.ADDSTORE, {
-            AddOfEditList: AddOfEditList,
-            isEdit: false,
-          });
-        }}
-      />
+      {isShowBtn ? (
+        <Button
+          title="Add"
+          onPress={() => {
+            navi.navigate(tagconst.ADDSTORE, {
+              AddOfEditList: AddOfEditList,
+              isEdit: false,
+            });
+          }}
+        />
+      ) : null}
       <FlatList
+        style={{ height: "95%" }}
         data={listItemStore}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity
-              onPress={() => onEdit(item)}
-              onLongPress={() => DeleteItem(item.id)}
-            >
-              <ItemStore itemStore={item} />
-            </TouchableOpacity>
+            <ItemStore
+              itemStore={item}
+              onEdit={onEdit}
+              DeleteItem={DeleteItem}
+            />
           );
         }}
         keyExtractor={(item) => item.id}

@@ -6,4 +6,6 @@ export default {
   black: "#0f0f0f",
   red: "#ff0000",
   textInput: "#a7a8ac",
+  bg_btn: "#645CBB",
+  border_btn: "#BFACE2",
 };

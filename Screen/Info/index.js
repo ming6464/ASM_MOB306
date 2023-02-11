@@ -13,7 +13,7 @@ const Info = (props) => {
   const [info, setInfo] = useState({
     name: "Nguyễn Gia Minh",
     studenId: "PH25430",
-    email: "mingph25430@fpt.edu.vn",
+    email: "mingph25430@fpt.edu.vn    ",
     phone: "01983884928",
   });
   const UpdateInfo = (info) => {
@@ -61,17 +61,19 @@ const Info = (props) => {
             {renderIcon(require("../../assets/phone__25.png"))} {info.phone}
           </Text>
         </View>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() =>
-            navi.navigate(tagconst.EDITINFOMATION, {
-              info: info,
-              setInfo: setInfo,
-            })
-          }
-        >
-          <Text style={styles.textBtn}>Edit</Text>
-        </TouchableOpacity>
+        <View style={styles.btn}>
+          <TouchableOpacity
+            style={styles.touchOpa}
+            onPress={() =>
+              navi.navigate(tagconst.EDITINFOMATION, {
+                info: info,
+                setInfo: setInfo,
+              })
+            }
+          >
+            <Text style={styles.textOpa}>Edit</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

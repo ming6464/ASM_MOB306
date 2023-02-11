@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TextInput,
   View,
@@ -13,17 +13,11 @@ import styles from "./styles";
 
 const EditStore = (props) => {
   const navi = props.navigation;
-  let name,
-    phone,
-    address,
-    id,
-    avatar,
-    isEdit,
-    state = 1,
-    AddOfEditList;
+  let name, phone, address, id, avatar;
+  const [state, setSate] = useState(1);
   const route = props.route;
-  AddOfEditList = route.params.AddOfEditList;
-  isEdit = route.params.isEdit;
+  const AddOfEditList = route.params.AddOfEditList;
+  const isEdit = route.params.isEdit;
   if (isEdit) {
     let itemStore = route.params.itemStore;
     name = itemStore.name;
@@ -31,7 +25,9 @@ const EditStore = (props) => {
     address = itemStore.address;
     avatar = itemStore.avatar;
     id = itemStore.id;
-    state = itemStore.state;
+    useEffect(() => {
+      setSate(itemStore.state);
+    }, []);
   }
   //   const {itemStore,isEdit} = route.params;
 
@@ -82,28 +78,24 @@ const EditStore = (props) => {
           onChangeText={(value) => (avatar = value + "")}
         />
         {isEdit ? (
-          // <TextInput
-          //   placeholder={"State"}
-          //   defaultValue={state + ""}
-          //   placeholderTextColor={color.black}
-          //   style={styles.textInput}
-          //   onChangeText={(value) => (state = value + "")}
-          // />
-          <View>
-            <TouchableOpacity>
-              <RadioButton
-                text={"Active"}
-                checked={state === 1 ? true : false}
-                size={20}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <RadioButton
-                text={"Inactive"}
-                checked={state === 0 ? true : false}
-                size={20}
-              />
-            </TouchableOpacity>
+          <View style={styles.container_state}>
+            <Text style={styles.text_state}>State : </Text>
+            <View>
+              <TouchableOpacity onPress={() => setSate(1)}>
+                <RadioButton
+                  text={"Active (1)"}
+                  checked={state === 1 ? true : false}
+                  size={20}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setSate(0)}>
+                <RadioButton
+                  text={"Inactive (0)"}
+                  checked={state === 0 ? true : false}
+                  size={20}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         ) : null}
       </View>

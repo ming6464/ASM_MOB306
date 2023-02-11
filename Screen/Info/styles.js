@@ -32,16 +32,20 @@ const styles = StyleSheet.create({
   },
   btn: {
     borderRadius: 30,
-    backgroundColor: "#645CBB",
-    alignItems: "center",
-    justifyContent: "center",
     height: 50,
     width: "100%",
-    borderColor: "#BFACE2",
+    borderColor: color.border_btn,
     borderWidth: 2,
     marginTop: 50,
   },
-  textBtn: {
+  touchOpa: {
+    backgroundColor: color.bg_btn,
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    borderRadius: 30,
+  },
+  textOpa: {
     color: color.white,
     fontSize: 20,
     fontWeight: "bold",
