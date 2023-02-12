@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   Image,
@@ -6,23 +6,15 @@ import {
   TouchableOpacity,
   ToastAndroid,
 } from "react-native";
+import DB from "../../db.json";
 import tagconst from "../../contains/tagconst";
 import styles from "./styles";
 const Info = (props) => {
   const navi = props.navigation;
-  const [info, setInfo] = useState({
-    name: "Nguyễn Gia Minh",
-    studenId: "PH25430",
-    email: "mingph25430@fpt.edu.vn    ",
-    phone: "01983884928",
-  });
-  const UpdateInfo = (info) => {
-    setInfo(info);
-  };
+  const [info, setInfo] = useState(DB.User);
   const renderIcon = (src) => {
     return <Image style={styles.icon} source={src} />;
   };
-
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -41,7 +33,7 @@ const Info = (props) => {
         <Image
           style={styles.img}
           source={{
-            uri: "https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/277519151_1433428187089496_6333398984156131861_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=XgKzLr1FHzMAX8T3PYC&_nc_ht=scontent.fhan14-3.fna&oh=00_AfApOMLavWkLTXvjWq6cx_YIRUasFyCuzje_8ViIhq42LQ&oe=63E6E924",
+            uri: info.avatar,
           }}
         />
       </View>

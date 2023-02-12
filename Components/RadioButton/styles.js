@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     color: color.primary,
     fontSize: 17,
     marginStart: 3,
+    width: "100%",
   },
 });
 export default styles;

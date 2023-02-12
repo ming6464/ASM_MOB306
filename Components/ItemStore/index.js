@@ -43,7 +43,7 @@ const ItemStore = ({ itemStore, onEdit, DeleteItem }) => {
                 style={styles.img_opa}
                 source={require("../../assets/edit_25_p2.png")}
               />
-              <Text style={styles.text_opa}>Edit</Text>
+              <Text style={[styles.text_opa, { width: 40 }]}>Edit</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.btn}>

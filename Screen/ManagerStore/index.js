@@ -9,77 +9,12 @@ import {
 } from "react-native";
 import ItemStore from "../../Components/ItemStore";
 import tagconst from "../../contains/tagconst";
+import DB from "../../db.json";
 
 const ManagerStore = (props) => {
   const navi = props.navigation;
   const [isShowBtn, setIsShowBtn] = useState(true);
-  let scrollY = 0;
-  let itemStore = [
-    {
-      id: 0,
-      avatar:
-        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      name: "Đồ lưu niệm",
-      phone: "092889388293",
-      address: "Hàng đông, Hà Nội",
-      state: 1,
-    },
-    {
-      id: 1,
-      avatar:
-        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      name: "Đồ lưu niệm",
-      phone: "092889388293",
-      address: "Hàng đông, Hà Nội",
-      state: 1,
-    },
-    {
-      id: 2,
-      avatar:
-        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      name: "Đồ lưu niệm",
-      phone: "092889388293",
-      address: "Hàng đông, Hà Nội",
-      state: 1,
-    },
-    {
-      id: 3,
-      avatar:
-        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      name: "Đồ lưu niệm",
-      phone: "092889388293",
-      address: "Hàng đông, Hà Nội",
-      state: 0,
-    },
-    {
-      id: 4,
-      avatar:
-        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      name: "Đồ lưu niệm",
-      phone: "092889388293",
-      address: "Hàng đông, Hà Nội",
-      state: 1,
-    },
-    {
-      id: 5,
-      avatar:
-        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      name: "Đồ lưu niệm",
-      phone: "092889388293",
-      address: "Hàng đông, Hà Nội",
-      state: 1,
-    },
-    {
-      id: 6,
-      avatar:
-        "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      name: "Đồ lưu niệm",
-      phone: "092889388293",
-      address: "Hàng đông, Hà Nội",
-      state: 1,
-    },
-  ];
-  const [listItemStore, setListItemStore] = useState(itemStore);
+  const [listItemStore, setListItemStore] = useState(DB.Store);
   const onEdit = (item) => {
     navi.navigate(tagconst.EDITSTORE, {
       AddOfEditList: AddOfEditList,
@@ -101,6 +36,7 @@ const ManagerStore = (props) => {
   const onDelete = (id) => {
     const newList = listItemStore.filter((item) => item.id != id);
     setListItemStore(newList);
+    DB.Store = newList;
   };
   const AddOfEditList = (item, isEdit) => {
     let newList;
@@ -117,6 +53,7 @@ const ManagerStore = (props) => {
       newList = [...listItemStore, item];
     }
     setListItemStore(newList);
+    DB.Store = newList;
   };
   return (
     <View>

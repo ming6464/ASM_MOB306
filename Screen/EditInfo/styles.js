@@ -42,10 +42,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 20,
   },
-  textTouchOpa: {
+  textOpa: {
     fontSize: 18,
     fontWeight: "bold",
     color: "#ede7f6",
+    width: "100%",
+    textAlign: "center",
   },
 });
 export default styles;

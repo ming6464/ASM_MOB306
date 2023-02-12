@@ -49,6 +49,8 @@ const styles = StyleSheet.create({
     color: color.white,
     fontSize: 20,
     fontWeight: "bold",
+    width: "100%",
+    textAlign: "center",
   },
   icon: {
     width: 25,

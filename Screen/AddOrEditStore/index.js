@@ -105,7 +105,7 @@ const EditStore = (props) => {
             style={styles.touchOpa}
             onPress={() => navi.navigate(tagconst.MANAGERSTORE)}
           >
-            <Text style={styles.textTouchOpa}>Cancel</Text>
+            <Text style={styles.textOpa}>Cancel</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.btn}>
@@ -126,7 +126,7 @@ const EditStore = (props) => {
               navi.navigate(tagconst.MANAGERSTORE);
             }}
           >
-            <Text style={styles.textTouchOpa}>{isEdit ? "Save" : "Add"}</Text>
+            <Text style={styles.textOpa}>{isEdit ? "Save" : "Add"}</Text>
           </TouchableOpacity>
         </View>
       </View>
