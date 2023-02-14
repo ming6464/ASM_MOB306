@@ -5,6 +5,7 @@ import {
   Text,
   ToastAndroid,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import RadioButton from "../../Components/RadioButton";
 import color from "../../contains/color";
@@ -18,6 +19,8 @@ const EditStore = (props) => {
   const route = props.route;
   const AddOfEditList = route.params.AddOfEditList;
   const isEdit = route.params.isEdit;
+  const rg_name = /^[a-zA-Z][a-zA-Z ]*$/;
+  const rg_phone = /0[0-9]{9}/;
   if (isEdit) {
     let itemStore = route.params.itemStore;
     name = itemStore.name;
@@ -29,7 +32,13 @@ const EditStore = (props) => {
       setSate(itemStore.state);
     }, []);
   }
-  //   const {itemStore,isEdit} = route.params;
+  const ShowAlert = (txt) => {
+    Alert.alert("Error !", txt, [
+      {
+        text: "close",
+      },
+    ]);
+  };
 
   const RederTextInput = (defaultValue, holder) => {
     return (
@@ -112,6 +121,15 @@ const EditStore = (props) => {
           <TouchableOpacity
             style={styles.touchOpa}
             onPress={() => {
+              if (
+                !rg_name.test(name) ||
+                !rg_phone.test(phone) ||
+                !rg_name.test(address) ||
+                String(avatar).length == 0
+              ) {
+                ShowAlert("Dữ liệu không đúng");
+                return;
+              }
               let item = {
                 name,
                 phone,

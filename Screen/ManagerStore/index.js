@@ -26,7 +26,10 @@ const ManagerStore = (props) => {
     Alert.alert("Delete ?", "Are you sure to detele id : " + id, [
       {
         text: "Yes",
-        onPress: () => onDelete(id),
+        onPress: () => {
+          ToastAndroid.show("Xoá thành công !", ToastAndroid.SHORT);
+          onDelete(id);
+        },
       },
       {
         text: "No",
