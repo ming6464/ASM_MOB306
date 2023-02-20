@@ -1,6 +1,4 @@
-import { Button, View, Image, Text, TouchableOpacity } from "react-native";
-import color from "../../contains/color";
-import DB from "../../db.json";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 import tagconst, { URL_USER } from "../../contains/tagconst";
 import styles from "./styles";
 import { useState, useEffect } from "react";

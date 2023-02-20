@@ -1,13 +1,6 @@
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import {
-  Button,
-  FlatList,
-  View,
-  TouchableOpacity,
-  ToastAndroid,
-  Alert,
-} from "react-native";
+import { Button, FlatList, View, ToastAndroid, Alert } from "react-native";
 import ItemStore from "../../Components/ItemStore";
 import tagconst, { URL_STORE } from "../../contains/tagconst";
 

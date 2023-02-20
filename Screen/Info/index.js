@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  ToastAndroid,
-} from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 import tagconst, { URL_USER } from "../../contains/tagconst";
 import styles from "./styles";
-import DB from "../../db.json";
 import { useIsFocused } from "@react-navigation/native";
 const Info = (props) => {
   const navi = props.navigation;
