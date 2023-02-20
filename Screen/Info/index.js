@@ -6,15 +6,22 @@ import {
   TouchableOpacity,
   ToastAndroid,
 } from "react-native";
-import DB from "../../db.json";
-import tagconst from "../../contains/tagconst";
+import tagconst, { URL_USER } from "../../contains/tagconst";
 import styles from "./styles";
+import DB from "../../db.json";
+import { useIsFocused } from "@react-navigation/native";
 const Info = (props) => {
   const navi = props.navigation;
-  const [info, setInfo] = useState(DB.User);
+  const [info, setInfo] = useState({});
   const renderIcon = (src) => {
     return <Image style={styles.icon} source={src} />;
   };
+
+  useEffect(() => {
+    fetch(URL_USER)
+      .then((res) => res.json())
+      .then((data) => setInfo(data));
+  }, [useIsFocused()]);
   return (
     <View style={styles.container}>
       <TouchableOpacity

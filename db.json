@@ -1,52 +1,19 @@
 {
   "User": {
-    "name": "Nguyễn Gia Minh",
+    "name": "Nguyen Gia Minh",
     "studenId": "PH25430",
     "email": "mingph25430@fpt.edu.vn",
-    "phone": "01983884928",
-    "avatar": "https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/277519151_1433428187089496_6333398984156131861_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Y4djwz2K7b8AX9fhAwW&_nc_ht=scontent.fhan14-3.fna&oh=00_AfBPHcmDdPg7cJEd1floHFx3F2MlAiVBa1u3aEyBtkCgJw&oe=63ECD7E4",
-    "coverPhoto": "https://duhocvietglobal.com/wp-content/uploads/2018/12/dat-nuoc-va-con-nguoi-anh-quoc.jpg"
+    "phone": "0919992903",
+    "avatar": "https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/277519151_1433428187089496_6333398984156131861_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Y4djwz2K7b8AX9fhAwW&_nc_ht=scontent.fhan14-3.fna&oh=00_AfBPHcmDdPg7cJEd1floHFx3F2MlAiVBa1u3aEyBtkCgJw&oe=63ECD7E4"
   },
   "Store": [
     {
-      "id": 0,
+      "name": "do luu niem",
+      "phone": "0939288109",
+      "address": "Ha noi",
       "avatar": "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      "name": "Đồ lưu niệm",
-      "phone": "092889388293",
-      "address": "Hàng đông, Hà Nội",
-      "state": 1
-    },
-    {
-      "id": 1,
-      "avatar": "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      "name": "Đồ lưu niệm",
-      "phone": "092889388293",
-      "address": "Hàng đông, Hà Nội",
-      "state": 1
-    },
-    {
-      "id": 2,
-      "avatar": "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      "name": "Đồ lưu niệm",
-      "phone": "092889388293",
-      "address": "Hàng đông, Hà Nội",
-      "state": 1
-    },
-    {
-      "id": 3,
-      "avatar": "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      "name": "Đồ lưu niệm",
-      "phone": "092889388293",
-      "address": "Hàng đông, Hà Nội",
-      "state": 0
-    },
-    {
-      "id": 4,
-      "avatar": "https://www.shutterstock.com/image-vector/red-store-vector-sign-promotion-600w-1918121837.jpg",
-      "name": "Đồ lưu niệm",
-      "phone": "092889388293",
-      "address": "Hàng đông, Hà Nội",
-      "state": 1
+      "state": 1,
+      "id": 2
     }
   ]
 }

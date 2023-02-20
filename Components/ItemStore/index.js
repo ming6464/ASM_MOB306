@@ -1,6 +1,6 @@
 import { Text, Image, View, TouchableOpacity } from "react-native";
 import styles from "./styles";
-const ItemStore = ({ itemStore, onEdit, DeleteItem }) => {
+const ItemStore = ({ itemStore, onEdit, onDelete }) => {
   let bg = "#43a047",
     bordercl = "#a5d6a7",
     bg2 = "#f44336",
@@ -37,7 +37,7 @@ const ItemStore = ({ itemStore, onEdit, DeleteItem }) => {
           <View style={styles.btn}>
             <TouchableOpacity
               style={styles.opa}
-              onPress={() => onEdit(itemStore)}
+              onPress={() => onEdit(itemStore.id)}
             >
               <Image
                 style={styles.img_opa}
@@ -49,7 +49,7 @@ const ItemStore = ({ itemStore, onEdit, DeleteItem }) => {
           <View style={styles.btn}>
             <TouchableOpacity
               style={styles.opa}
-              onPress={() => DeleteItem(itemStore.id)}
+              onPress={() => onDelete(itemStore.id)}
             >
               <Image
                 style={styles.img_opa}

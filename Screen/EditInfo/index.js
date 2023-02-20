@@ -1,64 +1,84 @@
-import { useState } from "react";
-import {
-  TextInput,
-  View,
-  Text,
-  ToastAndroid,
-  TouchableOpacity,
-} from "react-native";
-import DB from "../../db.json";
+import { useEffect, useState } from "react";
+import { TextInput, View, Text, TouchableOpacity, Alert } from "react-native";
 import color from "../../contains/color";
-import tagconst from "../../contains/tagconst";
+import tagconst, { URL_USER } from "../../contains/tagconst";
 import styles from "./styles";
 
 const EditInfo = (props) => {
   const navi = props.navigation;
-  var name, phone, email, studenId, avatar;
-  const route = props.route;
-  const setInfo = route.params.setInfo;
-  const info = route.params.info;
-  name = info.name;
-  email = info.email;
-  phone = info.phone;
-  studenId = info.studenId;
-  avatar = info.avatar;
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [studenId, setStudenId] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const info = props.route.params.info;
+  useEffect(() => {
+    setName(info.name);
+    setPhone(info.phone);
+    setEmail(info.email);
+    setStudenId(info.studenId);
+    setAvatar(info.avatar);
+  }, []);
+  const onSave = () => {
+    if (
+      !tagconst.regex_name.test(name) ||
+      !tagconst.regex_phone.test(phone) ||
+      email.length <= 0 ||
+      studenId.length <= 0
+    ) {
+      Alert.alert("Error !", "Dữ liệu không đúng, hoặc chưa đầy đủ !", [
+        {
+          text: "close",
+        },
+      ]);
+      return;
+    }
+    fetch(URL_USER, {
+      method: "PUT",
+      body: JSON.stringify({ name, studenId, email, phone, avatar }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }).then((res) => navi.goBack());
+  };
   return (
     <View style={styles.container}>
       <View style={styles.containerTextInput}>
         <TextInput
           placeholder="Name"
-          defaultValue={name}
+          value={name}
           placeholderTextColor={color.black}
           style={styles.textInput}
-          onChangeText={(value) => (name = value)}
+          onChangeText={(value1) => setName(value1)}
         />
         <TextInput
           placeholder="Student Id"
-          defaultValue={studenId}
+          value={studenId}
           placeholderTextColor={color.black}
           style={styles.textInput}
-          onChangeText={(value) => (studenId = value)}
+          onChangeText={(value1) => setStudenId(value1)}
         />
         <TextInput
           placeholder="Email"
-          defaultValue={email}
+          value={email}
           placeholderTextColor={color.black}
           style={styles.textInput}
-          onChangeText={(value) => (email = value)}
+          onChangeText={(value1) => setEmail(value1)}
         />
         <TextInput
           placeholder="Phone"
-          defaultValue={phone}
+          value={phone}
           placeholderTextColor={color.black}
           style={styles.textInput}
-          onChangeText={(value) => (phone = value)}
+          onChangeText={(value1) => setPhone(value1)}
         />
         <TextInput
           placeholder="Avatar"
-          defaultValue={avatar}
+          value={avatar}
           placeholderTextColor={color.black}
           style={styles.textInput}
-          onChangeText={(value) => (avatar = value)}
+          onChangeText={(value1) => setAvatar(value1)}
         />
       </View>
       <View style={styles.containerBtn}>
@@ -74,10 +94,7 @@ const EditInfo = (props) => {
           <TouchableOpacity
             style={styles.touchOpa}
             onPress={() => {
-              let coverPhoto = DB.User.coverPhoto;
-              DB.User = { name, studenId, email, phone, avatar, coverPhoto };
-              setInfo(DB.User);
-              navi.navigate(tagconst.USERINFOMATION);
+              onSave();
             }}
           >
             <Text style={styles.textOpa}>Save</Text>

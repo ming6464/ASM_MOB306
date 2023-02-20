@@ -1,21 +1,25 @@
 import { Button, View, Image, Text, TouchableOpacity } from "react-native";
 import color from "../../contains/color";
-import tagconst from "../../contains/tagconst";
-import styles from "./styles";
 import DB from "../../db.json";
+import tagconst, { URL_USER } from "../../contains/tagconst";
+import styles from "./styles";
 import { useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
 const Home = (props) => {
   const navi = props.navigation;
   const [infoHome, setInfoHome] = useState({});
-  useEffect(() => setInfoHome(DB.User), [useIsFocused()]);
+  useEffect(() => {
+    fetch(URL_USER)
+      .then((res) => res.json())
+      .then((data) => setInfoHome(data));
+  }, [useIsFocused()]);
   return (
     <View style={styles.container}>
       <View>
         <Image
           style={styles.user_imgCover}
           source={{
-            uri: infoHome.coverPhoto,
+            uri: "https://duhocvietglobal.com/wp-content/uploads/2018/12/dat-nuoc-va-con-nguoi-anh-quoc.jpg",
           }}
         />
         <TouchableOpacity

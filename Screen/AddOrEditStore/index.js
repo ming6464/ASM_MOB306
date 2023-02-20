@@ -1,92 +1,85 @@
 import { useEffect, useState } from "react";
-import {
-  TextInput,
-  View,
-  Text,
-  ToastAndroid,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { TextInput, View, Text, TouchableOpacity, Alert } from "react-native";
 import RadioButton from "../../Components/RadioButton";
 import color from "../../contains/color";
-import tagconst from "../../contains/tagconst";
+import tagconst, { URL_STORE } from "../../contains/tagconst";
 import styles from "./styles";
 
 const EditStore = (props) => {
   const navi = props.navigation;
-  let name, phone, address, id, avatar;
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [state, setSate] = useState(1);
-  const route = props.route;
-  const AddOfEditList = route.params.AddOfEditList;
-  const isEdit = route.params.isEdit;
-  const rg_name = /^[a-zA-Z][a-zA-Z ]*$/;
-  const rg_phone = /0[0-9]{9}/;
-  if (isEdit) {
-    let itemStore = route.params.itemStore;
-    name = itemStore.name;
-    phone = itemStore.phone;
-    address = itemStore.address;
-    avatar = itemStore.avatar;
-    id = itemStore.id;
-    useEffect(() => {
-      setSate(itemStore.state);
-    }, []);
-  }
-  const ShowAlert = (txt) => {
-    Alert.alert("Error !", txt, [
-      {
-        text: "close",
-      },
-    ]);
-  };
+  const editItem = props.route.params?.editItem;
 
-  const RederTextInput = (defaultValue, holder) => {
-    return (
-      <TextInput
-        placeholder={holder}
-        defaultValue={defaultValue}
-        placeholderTextColor={color.black}
-        style={styles.textInput}
-        onChangeText={(value) => {
-          ToastAndroid.show(defaultValue, ToastAndroid.SHORT);
-          return (defaultValue = value + "");
-        }}
-      />
-    );
+  useEffect(() => {
+    if (editItem) {
+      setName(editItem.name);
+      setPhone(editItem.phone);
+      setAddress(editItem.address);
+      setAvatar(editItem.avatar);
+      setSate(editItem.state);
+    }
+  }, [editItem?.id]);
+
+  const onSave = () => {
+    if (
+      !tagconst.regex_name.test(name) ||
+      !tagconst.regex_phone.test(phone) ||
+      address.length <= 0 ||
+      avatar.length <= 0
+    ) {
+      Alert.alert("Error !", "Dữ liệu không đúng, hoặc chưa đầy đủ !", [
+        {
+          text: "close",
+        },
+      ]);
+      return;
+    }
+    fetch(editItem ? URL_STORE + "/" + editItem.id : URL_STORE, {
+      method: editItem ? "PUT" : "POST",
+      body: JSON.stringify({ name, phone, address, avatar, state }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }).then((res) => navi.goBack());
   };
   return (
     <View style={styles.container}>
-      {isEdit ? <Text style={styles.text_id}>ID : {id}</Text> : null}
+      {editItem ? <Text style={styles.text_id}>ID : {editItem.id}</Text> : null}
       <View style={styles.containerTextInput}>
         <TextInput
           placeholder={"Name"}
-          defaultValue={name}
+          value={name}
           placeholderTextColor={color.black}
           style={styles.textInput}
-          onChangeText={(value) => (name = value + "")}
+          onChangeText={(value1) => setName(value1)}
         />
         <TextInput
           placeholder={"Phone"}
-          defaultValue={phone}
+          value={phone}
           placeholderTextColor={color.black}
           style={styles.textInput}
-          onChangeText={(value) => (phone = value + "")}
+          onChangeText={(value1) => setPhone(value1)}
         />
         <TextInput
           placeholder={"Address"}
-          defaultValue={address}
+          value={address}
           placeholderTextColor={color.black}
           style={styles.textInput}
-          onChangeText={(value) => (address = value + "")}
+          onChangeText={(value1) => setAddress(value1)}
         />
         <TextInput
           placeholder={"Avatar"}
-          defaultValue={avatar}
+          value={avatar}
           placeholderTextColor={color.black}
           style={styles.textInput}
-          onChangeText={(value) => (avatar = value + "")}
+          onChangeText={(value1) => setAvatar(value1)}
         />
-        {isEdit ? (
+        {editItem ? (
           <View style={styles.container_state}>
             <Text style={styles.text_state}>State : </Text>
             <View>
@@ -112,7 +105,7 @@ const EditStore = (props) => {
         <View style={styles.btn}>
           <TouchableOpacity
             style={styles.touchOpa}
-            onPress={() => navi.navigate(tagconst.MANAGERSTORE)}
+            onPress={() => navi.goBack()}
           >
             <Text style={styles.textOpa}>Cancel</Text>
           </TouchableOpacity>
@@ -121,30 +114,10 @@ const EditStore = (props) => {
           <TouchableOpacity
             style={styles.touchOpa}
             onPress={() => {
-              if (
-                !rg_name.test(name) ||
-                !rg_phone.test(phone) ||
-                !rg_name.test(address) ||
-                String(avatar).length == 0
-              ) {
-                ShowAlert("Dữ liệu không đúng");
-                return;
-              }
-              let item = {
-                name,
-                phone,
-                address,
-                state,
-                avatar,
-              };
-              if (isEdit) {
-                item.id = id;
-              }
-              AddOfEditList(item, isEdit);
-              navi.navigate(tagconst.MANAGERSTORE);
+              onSave();
             }}
           >
-            <Text style={styles.textOpa}>{isEdit ? "Save" : "Add"}</Text>
+            <Text style={styles.textOpa}>{editItem ? "Save" : "Add"}</Text>
           </TouchableOpacity>
         </View>
       </View>

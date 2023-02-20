@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 import {
   Button,
   FlatList,
@@ -8,27 +9,43 @@ import {
   Alert,
 } from "react-native";
 import ItemStore from "../../Components/ItemStore";
-import tagconst from "../../contains/tagconst";
-import DB from "../../db.json";
+import tagconst, { URL_STORE } from "../../contains/tagconst";
 
 const ManagerStore = (props) => {
   const navi = props.navigation;
-  const [isShowBtn, setIsShowBtn] = useState(true);
-  const [listItemStore, setListItemStore] = useState(DB.Store);
-  const onEdit = (item) => {
-    navi.navigate(tagconst.EDITSTORE, {
-      AddOfEditList: AddOfEditList,
-      isEdit: true,
-      itemStore: item,
-    });
+  const [listItemStore, setListItemStore] = useState([]);
+  const isFocus = useIsFocused();
+  const getList = () => {
+    fetch(URL_STORE)
+      .then((res) => res.json())
+      .then((data) => {
+        setListItemStore(data);
+      })
+      .catch(() => {
+        ToastAndroid.show("lỗi", ToastAndroid.SHORT);
+      });
   };
-  const DeleteItem = (id) => {
+
+  useEffect(() => {
+    getList();
+  }, [isFocus]);
+
+  const onEdit = (itemId) => {
+    fetch(URL_STORE + "/" + itemId)
+      .then((res) => res.json())
+      .then((data) => navi.navigate(tagconst.EDITSTORE, { editItem: data }))
+      .catch(() => ToastAndroid.show("Lỗi", ToastAndroid.SHORT));
+  };
+  const onDelete = (id) => {
     Alert.alert("Delete ?", "Are you sure to detele id : " + id, [
       {
         text: "Yes",
         onPress: () => {
-          ToastAndroid.show("Xoá thành công !", ToastAndroid.SHORT);
-          onDelete(id);
+          ToastAndroid.show("successful delete !", ToastAndroid.SHORT);
+          fetch(URL_STORE + "/" + id, { method: "DELETE" }).then((res) => {
+            ToastAndroid.show("error", ToastAndroid.SHORT);
+            getList();
+          });
         },
       },
       {
@@ -36,51 +53,21 @@ const ManagerStore = (props) => {
       },
     ]);
   };
-  const onDelete = (id) => {
-    const newList = listItemStore.filter((item) => item.id != id);
-    setListItemStore(newList);
-    DB.Store = newList;
-  };
-  const AddOfEditList = (item, isEdit) => {
-    let newList;
-    if (isEdit) {
-      newList = listItemStore.map((e) => {
-        if (e.id == item.id) {
-          return item;
-        }
-        return e;
-      });
-    } else {
-      let length = listItemStore.length;
-      item.id = length == 0 ? length : listItemStore[length - 1].id + 1;
-      newList = [...listItemStore, item];
-    }
-    setListItemStore(newList);
-    DB.Store = newList;
-  };
+
   return (
     <View>
-      {isShowBtn ? (
-        <Button
-          title="Add"
-          onPress={() => {
-            navi.navigate(tagconst.ADDSTORE, {
-              AddOfEditList: AddOfEditList,
-              isEdit: false,
-            });
-          }}
-        />
-      ) : null}
+      <Button
+        title="Add"
+        onPress={() => {
+          navi.navigate(tagconst.ADDSTORE);
+        }}
+      />
       <FlatList
         style={{ height: "95%" }}
         data={listItemStore}
         renderItem={({ item }) => {
           return (
-            <ItemStore
-              itemStore={item}
-              onEdit={onEdit}
-              DeleteItem={DeleteItem}
-            />
+            <ItemStore itemStore={item} onEdit={onEdit} onDelete={onDelete} />
           );
         }}
         keyExtractor={(item) => item.id}
